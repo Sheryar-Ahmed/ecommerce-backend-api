@@ -5,7 +5,7 @@ const sendTokenWithCookie = require('../utils/cookieToken');
 const sendEmail = require('../utils/sendEmail.js');
 const crypto = require('crypto');
 const cloudinary = require('cloudinary');
-
+const setCorsHeaders = require('../middleware/corsmiddleware');
 
 
 const userRegistration = expressAsyncHandler(async (req, res) => {
@@ -267,16 +267,17 @@ const deleteUser = expressAsyncHandler(async (req, res) => {
 
 
 module.exports = {
-    userRegistration,
-    userLogin,
-    logout,
-    forgotPassword,
-    resetPassword,
-    getUserDetails,
-    updatePassword,
-    updateProfile,
-    getAllUsers,
-    getSingleUser,
-    updateRole,
-    deleteUser
-};
+    userRegistration: setCorsHeaders(userRegistration),
+    userLogin: setCorsHeaders(userLogin),
+    logout: setCorsHeaders(logout),
+    forgotPassword: setCorsHeaders(forgotPassword),
+    resetPassword: setCorsHeaders(resetPassword),
+    getUserDetails: setCorsHeaders(getUserDetails),
+    updatePassword: setCorsHeaders(updatePassword),
+    updateProfile: setCorsHeaders(updateProfile),
+    getAllUsers: setCorsHeaders(getAllUsers),
+    getSingleUser: setCorsHeaders(getSingleUser),
+    updateRole: setCorsHeaders(updateRole),
+    deleteUser: setCorsHeaders(deleteUser),
+  };
+  

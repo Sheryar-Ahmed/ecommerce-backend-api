@@ -10,12 +10,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const app = express();
-const corsOptions = {
-    origin: `${process.env.REACT_APP_BASE_URL}`,
-    credentials: true,            //access-control-allow-credentials:true
-    optionSuccessStatus: 200
-}
-app.use(cors(corsOptions));
+
+app.use(cors({ origin: "http://192.168.43.72:3000", credentials: true }));
 app.use(express.json({ limit: '25mb' }));
 app.use(express.urlencoded({ limit: '25mb', extended: true }));
 app.use(cookieParser());
@@ -23,7 +19,7 @@ app.use(bodyParser.json());
 app.use(
     bodyParser.urlencoded({
         extended: false,
-    }),
+    })
 );
 app.use(fileUpload());
 
@@ -32,4 +28,5 @@ app.use('/api/v1', users);
 app.use('/api/v1', orders);
 app.use('/api/v1', payment);
 app.use(errorHanlder);
+
 module.exports = app;
